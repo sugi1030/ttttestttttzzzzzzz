@@ -119,7 +119,8 @@
 <body>
     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea3db63fe64092742d0d775bed595f3b&libraries=services"></script>
     <div class="map_wrap">
-        <div class="mymap"></div>
+        <!-- <div class="mymap"></div> -->
+        <div id="out"></div>
         <div class="formInner">
             <form onsubmit="; return false;">
                 <input type="text" placeholder="검색어를이입력해주세요" class="mainInput">
@@ -141,12 +142,6 @@
 
 
         // 지도생성
-        const mapContainer = document.querySelector('.mymap'), // 지도를 표시할 div 
-            mapOption = {
-                center: new kakao.maps.LatLng(37.3405143, 126.8357822), // 지도의 중심좌표 우리집
-                level: 4 // 360 * 640 기준으로 가득참 
-            };
-        const map = new kakao.maps.Map(mapContainer, mapOption);  // 지도를 생성합니다  
 
 
         function success(position) {
@@ -154,14 +149,18 @@
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
             console.log(`위도 : ${lat} 경도 ${lon}` );
+            const mapContainer = document.querySelector('.mymap'), // 지도를 표시할 div 
+            mapOption = {
+                center: new kakao.maps.LatLng(lat, lon), // 지도의 중심좌표 우리집
+                level: 5 // 360 * 640 기준으로 가득참 
+            };
+        const map = new kakao.maps.Map(mapContainer, mapOption);  // 지도를 생성합니다
 
         }
         function failer() {
             alert("Can't Find Location");
         }
         navigator.geolocation.getCurrentPosition(success, failer)
-
-
 
     </script>
 </body>
